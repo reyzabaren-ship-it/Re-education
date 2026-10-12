@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPulse - Portal Berita & Isu Pendidikan Sekolah Indonesia</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 1. HEADER */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            letter-spacing: -0.5px;
+        }
+
+        .logo h1 span {
+            color: var(--accent-color);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 6px 16px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus-within {
+            border-color: var(--accent-color);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            padding: 6px;
+            font-size: 0.9rem;
+            width: 220px;
+        }
+
+        /* 2. NAVIGASI */
+        nav {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            overflow-x: auto;
+        }
+
+        .nav-links li button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: block;
+            padding: 14px 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #cbd5e1;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .nav-links li button:hover, 
+        .nav-links li button.active {
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* LAYOUT (ARTICLE + SIDEBAR) */
+        .main-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin: 40px auto;
+        }
+
+        @media (min-width: 992px) {
+            .main-wrapper {
+                grid-template-columns: 2.6fr 1fr;
+            }
+        }
+
+        /* 3. ARTIKEL UTAMA */
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 22px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .featured-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .featured-img {
+            position: relative;
+            height: 380px;
+            overflow: hidden;
+        }
+
+        .featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .featured-card:hover .featured-img img {
+            transform: scale(1.03);
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .featured-content {
+            padding: 25px;
+        }
+
+        .meta-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .meta-info i {
+            margin-right: 5px;
+            color: var(--accent-color);
+        }
+
+        .featured-content h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.6rem;
+            color: var(--text-heading);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .featured-content p {
+            color: var(--text-main);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .btn-read {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-read:hover {
+            background: var(--accent-hover);
+        }
+
+        .grid-articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .article-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-img {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-body h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.05rem;
+            color: var(--text-heading);
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+
+        .card-body p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .source-tag {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+
+        /* 4. SIDEBAR */
+        aside {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .widget {
+            background: var(--card-bg);
+            padding: 22px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .widget-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--bg-color);
+            color: var(--text-heading);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .trending-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .trending-item {
+            display: flex;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .trending-num {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #cbd5e1;
+            min-width: 25px;
+        }
+
+        .trending-info h4 {
+            font-size: 0.88rem;
+            line-height: 1.3;
+            color: var(--text-heading);
+            transition: color 0.2s;
+        }
+
+        .trending-item:hover .trending-info h4 {
+            color: var(--accent-color);
+        }
+
+        .trending-info span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .newsletter-box {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #fff;
+        }
+
+        .newsletter-box .widget-title {
+            color: #fff;
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+
+        .newsletter-box p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: #fff;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            background: var(--accent-color);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* 5. FOOTER */
+        footer {
+            background-color: var(--primary-color);
+            color: #94a3b8;
+            padding: 50px 0 20px;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: #ffffff;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-col p {
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: background 0.2s;
+        }
+
+        .social-icons a:hover {
+            background: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 0.82rem;
+        }
+
+        /* MODAL PEMBACA BERITA SEPENUHNYA */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 820px;
+            max-height: 90vh;
+            border-radius: 16px;
+            overflow-y: auto;
+            position: relative;
+            padding: 30px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f1f5f9;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+        }
+
+        .modal-body h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.6rem;
+            color: var(--text-heading);
+            margin: 15px 0;
+            line-height: 1.4;
+        }
+
+        .modal-img {
+            width: 100%;
+            height: 340px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content-text p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #334155;
+            margin-bottom: 18px;
+        }
+
+        .modal-content-text blockquote {
+            background: #f1f5f9;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .search-bar input {
+                width: 100%;
+            }
+            .featured-img {
+                height: 240px;
+            }
+            .modal-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. HEADER -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <h1>Edu<span>Pulse</span></h1>
+            </a>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Cari kasus & isu murid sekolah..." onkeyup="filterArticles()">
+                <i class="fa-solid fa-magnifying-glass" style="color:var(--text-muted)"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. NAVIGASI -->
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><button class="active" onclick="filterCategory('semua', this)"><i class="fa-solid fa-house"></i> Semua Isu</button></li>
+                <li><button onclick="filterCategory('Karakter & Perundungan', this)">Perundungan & Karakter</button></li>
+                <li><button onclick="filterCategory('Literasi Digital', this)">Literasi & Media Sosial</button></li>
+                <li><button onclick="filterCategory('Fasilitas & Kurikulum', this)">Fasilitas & Digitalisasi</button></li>
+                <li><button onclick="filterCategory('Kesehatan Mental', this)">Kesehatan Mental Murid</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container main-wrapper">
+        
+        <!-- 3. ARTIKEL UTAMA -->
+        <main>
+            <h2 class="section-title">Fokus Utama: Masalah Murid & Sekolah Terkini</h2>
+
+            <!-- Artikel Utama (Featured) -->
+            <article class="featured-card">
+                <div class="featured-img">
+                    <span class="badge">Perundungan & Karakter</span>
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1000&q=80" alt="Suasana Kelas Sekolah">
+                </div>
+                <div class="featured-content">
+                    <div class="meta-info">
+                        <span><i class="fa-regular fa-user"></i> Tim Jurnalisme Pendidikan</span>
+                        <span><i class="fa-regular fa-clock"></i> 5 Oktober 2026</span>
+                        <span><i class="fa-solid fa-check-double"></i> Sumber: BBPMP / Kemendikdasmen</span>
+                    </div>
+                    <h2>Dilema Bullying & Kejar Target Kurikulum: Sekolah Wajib Hadirkan Ruang Aman Bagi Murid</h2>
+                    <p>
+                        Gelombang sorotan publik di TikTok dan Instagram mengenai kasus perundungan (bullying) antar-murid kembali memicu diskusi hangat. Para pakar pendidikan menekankan bahwa sekolah tidak boleh hanya berfokus pada pencapaian akademik semata, namun juga wajib menyediakan perlindungan mental dan lingkungan yang inklusif bagi seluruh peserta didik...
+                    </p>
+                    <button class="btn-read" onclick="openModal('feat')">Baca Sepenuhnya <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </article>
+
+            <!-- Grid Artikel Berita Pendidikan -->
+            <div class="grid-articles" id="articleGrid">
+                
+                <!-- Artikel 1 -->
+                <article class="article-card" data-category="Literasi Digital" data-title="fenomena murid buat konten viral tiktok instagram kelas">
+                    <div class="card-img">
+                        <span class="badge" style="background:#dc2626;">Literasi Digital</span>
+                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=500&q=80" alt="Siswa Belajar di Kelas">
+                    </div>
+                    <div class="card-body">
+                        <div class="meta-info">
+                            <span><i class="fa-regular fa-clock"></i> 4 Okt 2026</span>
+                        </div>
+                        <h3>Viral Fenomena Murid Bikin Konten di Kelas: Bagaimana Guru & Sekolah Harus Bersikap?</h3>
+                        <p>Maraknya tren mengunggah video ruang kelas ke TikTok memicu polemik privasi dan kedisiplinan. Pengamat pendidikan mendorong edukasi etika digital dibanding sekadar hukuman...</p>
+                        <span class="source-tag">Sumber: Kompas / Masoem Edu</span>
+                        <button class="btn-read" onclick="openModal('art1')">Baca Sepenuhnya <i class="fa-solid fa-angle-right"></i></button>
+                    </div>
+                </article>
+
+                <!-- Artikel 2 -->
+                <article class="article-card" data-category="Literasi Digital" data-title="kemampuan membaca murid smp rendah fungsional">
+                    <div class="card-img">
+                        <span class="badge" style="background:#0284c7;">Literasi & Baca</span>
+                        <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=500&q=80" alt="Perpustakaan Sekolah">
+                    </div>
+                    <div class="card-body">
+                        <div class="meta-info">
+                            <span><i class="fa-regular fa-clock"></i> 3 Okt 2026</span>
+                        </div>
+                        <h3>Sorotan Viral Murid SMP Tak Bisa Membaca Lancar: Kemendikdasmen Dorong Asesmen Holistik</h3>
+                        <p>Video memperlihatkan siswa jenjang menengah kesulitan memahami kalimat sederhana viral di X. Pemerintah tekankan kolaborasi erat antara orang tua dan sekolah...</p>
+                        <span class="source-tag">Sumber: BBPMP Kemendikdasmen</span>
+                        <button class="btn-read" onclick="openModal('art2')">Baca Sepenuhnya <i class="fa-solid fa-angle-right"></i></button>
+                    </div>
+                </article>
+
+                <!-- Artikel 3 -->
+                <article class="article-card" data-category="Fasilitas & Kurikulum" data-title="digitalisasi sekolah interactive flat panel perbaikan fasilitas">
+                    <div class="card-img">
+                        <span class="badge" style="background:#059669;">Fasilitas Digital</span>
+                        <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=500&q=80" alt="Papan Tulis Digital">
+                    </div>
+                    <div class="card-body">
+                        <div class="meta-info">
+                            <span><i class="fa-regular fa-clock"></i> 2 Okt 2026</span>
+                        </div>
+                        <h3>Digitalisasi Sekolah 2026: Pembagian Interactive Flat Panel (IFP) & Pengajuan Perbaikan Online</h3>
+                        <p>Pemerintah menargetkan modernisasi fasilitas belajar dengan memberikan papan interaktif digital serta kemudahan sekolah mengajukan perbaikan gedung secara daring...</p>
+                        <span class="source-tag">Sumber: SCTV / detikEdu</span>
+                        <button class="btn-read" onclick="openModal('art3')">Baca Sepenuhnya <i class="fa-solid fa-angle-right"></i></button>
+                    </div>
+                </article>
+
+                <!-- Artikel 4 -->
+                <article class="article-card" data-category="Kesehatan Mental" data-title="kesehatan mental murid tekanan ujian sekolah jam belajar">
+                    <div class="card-img">
+                        <span class="badge" style="background:#7c3aed;">Kesehatan Mental</span>
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=80" alt="Siswa Ujian">
+                    </div>
+                    <div class="card-body">
+                        <div class="meta-info">
+                            <span><i class="fa-regular fa-clock"></i> 1 Okt 2026</span>
+                        </div>
+                        <h3>Dampak Tekanan Akademik pada Kesehatan Mental Siswa: Peran Guru BK Diperkuat</h3>
+                        <p>Curhatan para siswa di media sosial mengenai kelelahan fisik dan mental (burnout) di sekolah direspons positif dengan peningkatan peran bimbingan konseling...</p>
+                        <span class="source-tag">Sumber: Psikologi Edukasi / ANTARA</span>
+                        <button class="btn-read" onclick="openModal('art4')">Baca Sepenuhnya <i class="fa-solid fa-angle-right"></i></button>
+                    </div>
+                </article>
+
+            </div>
+        </main>
+
+        <!-- 4. SIDEBAR -->
+        <aside>
+            <!-- Widget Komitmen Edukasi -->
+            <div class="widget">
+                <h3 class="widget-title"><i class="fa-solid fa-shield-cat" style="color:var(--accent-color)"></i> Verifikasi Isu Sekolah</h3>
+                <p style="font-size:0.86rem; color:var(--text-muted);">
+                    Setiap isu pendidikan dan keluhan murid yang viral di media sosial ditelusuri kebenarannya bersama pihak sekolah, Dinas Pendidikan, dan Kemendikdasmen.
+                </p>
+            </div>
+
+            <!-- Widget Trending Isu Sekolah -->
+            <div class="widget">
+                <h3 class="widget-title"><i class="fa-solid fa-fire" style="color:#ef4444;"></i> Trending di Media Sosial</h3>
+                <ul class="trending-list">
+                    <li class="trending-item" onclick="openModal('art1')">
+                        <span class="trending-num">01</span>
+                        <div class="trending-info">
+                            <h4>Pro-Kontra Konten TikTok di Dalam Kelas</h4>
+                            <span>24.5k ulasan di X (Twitter)</span>
+                        </div>
+                    </li>
+                    <li class="trending-item" onclick="openModal('feat')">
+                        <span class="trending-num">02</span>
+                        <div class="trending-info">
+                            <h4>Pencegahan Bullying & Sekolah Bebas Kekerasan</h4>
+                            <span>19.1k diskusi Instagram</span>
+                        </div>
+                    </li>
+                    <li class="trending-item" onclick="openModal('art2')">
+                        <span class="trending-num">03</span>
+                        <div class="trending-info">
+                            <h4>Tantangan Literasi Membaca Murid SMP</h4>
+                            <span>14.8k postingan Facebook</span>
+                        </div>
+                    </li>
+                    <li class="trending-item" onclick="openModal('art3')">
+                        <span class="trending-num">04</span>
+                        <div class="trending-info">
+                            <h4>Bantuan Papan Interaktif (IFP) Sekolah</h4>
+                            <span>11.2k dibagikan di LinkedIn</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Widget Newsletter -->
+            <div class="widget newsletter-box">
+                <h3 class="widget-title"><i class="fa-regular fa-paper-plane"></i> Newsletter Edukasi</h3>
+                <p>Dapatkan analisis mingguan mengenai isu anak, sekolah, dan tips mendampingi siswa.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Terima kasih! Email Anda telah terdaftar.');">
+                    <input type="email" placeholder="Masukkan email Anda..." required>
+                    <button type="submit">Daftar Newsletter</button>
+                </form>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- 5. FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Tentang EduPulse</h4>
+                    <p>
+                        EduPulse adalah platform independen yang mendedikasikan diri untuk menyuarakan isu pendidikan, hak anak di sekolah, serta memberikan analisis objektif atas fenomena murid yang viral di media sosial.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Kategori Isu</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="filterCategory('Karakter & Perundungan')">Perundungan & Karakter</a></li>
+                        <li><a href="#" onclick="filterCategory('Literasi Digital')">Literasi Digital Murid</a></li>
+                        <li><a href="#" onclick="filterCategory('Fasilitas & Kurikulum')">Fasilitas Modern</a></li>
+                        <li><a href="#" onclick="filterCategory('Kesehatan Mental')">Kesehatan Mental Siswa</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navigasi & Regulasi</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Permendikbud Safe School</a></li>
+                        <li><a href="#">Layanan Pengaduan Bullying</a></li>
+                        <li><a href="#">Pedoman Etika Konten Sekolah</a></li>
+                        <li><a href="#">Kontak Redaksi Edukasi</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Kantor Redaksi</h4>
+                    <p>Gedung Pusat Pendidikan Lt. 3, Jakarta Selatan</p>
+                    <p>Email: redaksi@edupulse.id</p>
+                    <p>Telp: (021) 7890-1234</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPulse Indonesia. Didukung oleh jurnalisme pendidikan terverifikasi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL PEMBACA ARTIKEL UTUH -->
+    <div class="modal-overlay" id="articleModal">
+        <div class="modal-container">
+            <button class="close-modal" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-body" id="modalBody">
+                <!-- Konten berita utuh diinjeksi via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT KONTEN BERAJAR/BERITA PENDIDIKAN UTUH -->
+    <script>
+        // DATA BERITA PENDIDIKAN LENGKAP BISA DIBACA SEPENUHNYA
+        const articlesData = {
+            'feat': {
+                badge: 'Perundungan & Karakter',
+                title: 'Dilema Bullying & Kejar Target Kurikulum: Sekolah Wajib Hadirkan Ruang Aman Bagi Murid',
+                author: 'Tim Jurnalisme Pendidikan',
+                date: '5 Oktober 2026',
+                source: 'BBPMP / Kemendikdasmen',
+                image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1000&q=80',
+                content: `
+                    <p><strong>JAKARTA, EduPulse</strong> — Maraknya video yang memperlihatkan konflik dan perundungan (bullying) di kalangan murid sekolah yang viral di media sosial memicu alarm serius bagi dunia pendidikan nasional. Diskusi publik kini mempertanyakan fokus sekolah yang sering kali terlalu dibebani oleh target kurikulum dan akademis semata, hingga mengabaikan penciptaan lingkungan sekolah yang aman dan ramah anak.</p>
+                    <p>Pengamat pendidikan menegaskan bahwa sekolah tidak boleh dipandang sekadar tempat mentransfer ilmu, melainkan ruang pembentukan karakter dan interaksi sosial anak. Ketika seorang murid merasa tidak aman akibat intimidasi verbal maupun fisik dari teman sebayanya, maka proses belajar otomatis terganggu secara mendasar.</p>
+                    <blockquote>"Sekolah harus mampu menyeimbangkan antara mengejar ketuntasan akademis dan membentuk iklim sekolah yang bebas kekerasan. Keberadaan Tim Pencegahan dan Penanganan Kekerasan (TPPK) di setiap satuan pendidikan harus berjalan nyata, bukan sekadar formalitas di atas kertas."</blockquote>
+                    <p>Pemerintah melalui Kemendikdasmen terus mendorong penguatan kurikulum berbasis karakter serta meminta guru Bimbingan Konseling (BK) untuk aktif melakukan pendekatan persuasif. Orang tua juga diimbau untuk menjalin komunikasi dua arah dengan anak setiap hari guna mendeteksi dini perubahan perilaku akibat tekanan sosial di sekolah.</p>
+                `
+            },
+            'art1': {
+                badge: 'Literasi Digital',
+                title: 'Viral Fenomena Murid Bikin Konten di Kelas: Bagaimana Guru & Sekolah Harus Bersikap?',
+                author: 'Siti Rahma, M.Pd.',
+                date: '4 Oktober 2026',
+                source: 'Kompasiana / Masoem University Edu',
+                image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=80',
+                content: `
+                    <p><strong>BANDUNG, EduPulse</strong> — Fenomena murid maupun guru yang membuat konten video berdurasi pendek untuk TikTok atau Instagram Reel saat jam pelajaran berlangsung sering kali viral dan memancing pro-kontra di masyarakat. Di satu sisi, konten ini dianggap hiburan kreatif, namun di sisi lain berisiko mengganggu fokus belajar serta melanggar privasi anak di sekolah.</p>
+                    <p>Para ahli literasi digital menyarankan agar sekolah tidak langsung menerapkan larangan total yang represif, melainkan memanfaatkan momen tersebut sebagai sarana edukasi literasi digital secara langsung kepada siswa.</p>
+                    <p>Beberapa langkah rekomendasi bagi pihak sekolah antara lain:</p>
+                    <ul>
+                        <li><strong>Menetapkan Batasan Jelas:</strong> Pengambilan gambar atau video di kelas hanya diperbolehkan jika relevan dengan tugas pembelajaran.</li>
+                        <li><strong>Perlindungan Privasi:</strong> Melarang keras mengunggah video yang menampilkan ejekan, kekurangan teman, atau konten yang mempermalukan orang lain.</li>
+                        <li><strong>Diskusi Etika Digital:</strong> Mengajak murid menganalisis dampak jangka panjang dari rekam jejak digital yang mereka ciptakan.</li>
+                    </ul>
+                    <p>Dengan komunikasi yang terbuka, murid diajarkan untuk bersikap bijak dan kritis sebagai pembuat maupun konsumen konten di media sosial.</p>
+                `
+            },
+            'art2': {
+                badge: 'Literasi & Baca',
+                title: 'Sorotan Viral Murid SMP Tak Bisa Membaca Lancar: Kemendikdasmen Dorong Asesmen Holistik',
+                author: 'Ahmad Fauzi',
+                date: '3 Oktober 2026',
+                source: 'BBPMP Jawa Barat / Kemendikdasmen',
+                image: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1000&q=80',
+                content: `
+                    <p><strong>PANGANDARAN, EduPulse</strong> — Video yang menampilkan temuan sejumlah murid di tingkat Sekolah Menengah Pertama (SMP) yang belum lancar membaca sempat mengguncang publik dan menjadi perbincangan hangat di X dan Facebook. Publik sempat mempertanyakan efektivitas proses pembelajaran di tingkat dasar (SD).</p>
+                    <p>Menanggapi isu tersebut, Kementerian Pendidikan Dasar dan Menengah menyuarakan agar masalah ini tidak disikapi dengan saling menyalahkan antara guru SD dan guru SMP. Fenomena "ketinggalan kemampuan membaca" sering kali disebabkan oleh berbagai faktor kompleks, termasuk Anak Berkebutuhan Khusus (ABK) yang belum teridentifikasi, efek samping pandemi, hingga minimnya budaya membaca di rumah.</p>
+                    <p>Langkah konkret yang kini dijalankan oleh dinas pendidikan daerah adalah menyediakan program pendampingan baca khusus (*remedial reading*) di sekolah tanpa memberi stigma negatif kepada murid yang bersangkutan. Pendekatan kolaboratif antara guru, psikolog anak, dan orang tua menjadi kunci utama menyelesaikan masalah kemampuan literasi dasar ini.</p>
+                `
+            },
+            'art3': {
+                badge: 'Fasilitas Digital',
+                title: 'Digitalisasi Sekolah 2026: Pembagian Interactive Flat Panel (IFP) & Pengajuan Perbaikan Online',
+                author: 'Redaksi Teknologi Edukasi',
+                date: '2 Oktober 2026',
+                source: 'SCTV / detikEdu / Liputan 6',
+                image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1000&q=80',
+                content: `
+                    <p><strong>JAKARTA, EduPulse</strong> — Guna mempercepat pemerataan kualitas pendidikan, pemerintah merealisasikan program digitalisasi sekolah secara masif sepanjang tahun 2026. Setiap satuan pendidikan yang memenuhi syarat bertahap akan menerima bantuan Interactive Flat Panel (IFP) atau papan tulis digital interaktif guna menunjang proses belajar mengajar berbasis audio-visual.</p>
+                    <p>Selain bantuan perangkat pembelajaran, pemerintah juga meluncurkan sistem pengajuan revitalisasi gedung sekolah secara daring (online). Langkah ini memangkas birokrasi yang panjang dan transparan, sehingga sekolah yang mengalami kerusakan fasilitas fisik dapat langsung mengunggah foto kondisi bangunan untuk segera mendapatkan dana perbaikan.</p>
+                    <p>Langkah ini disambut antusias oleh para guru dan pengurus sekolah di daerah pelosok, karena memperbesar peluang murid di seluruh Indonesia menikmati fasilitas belajar modern yang layak dan aman.</p>
+                `
+            },
+            'art4': {
+                badge: 'Kesehatan Mental',
+                title: 'Dampak Tekanan Akademik pada Kesehatan Mental Siswa: Peran Guru BK Diperkuat',
+                author: 'Dr. Kirana Sasti',
+                date: '1 Oktober 2026',
+                source: 'Jurnal Psikologi Anak / ANTARA',
+                image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1000&q=80',
+                content: `
+                    <p><strong>YOGYAKARTA, EduPulse</strong> — Tingginya beban ujian, tugas harian, dan ekspektasi sosial sering kali menimbulkan kecemasan mendalam pada murid sekolah menengah. Di berbagai platform media sosial, tagar terkait stres belajar dan kecemasan menghadapi ujian sering dicurahkan oleh para remaja.</p>
+                    <p>Para pakar psikologi sekolah mengingatkan bahwa stres kronis pada murid yang tidak tertangani dapat berdampak pada penurunan prestasi, gangguan tidur, hingga depresi. Oleh karena itu, posisi Guru Bimbingan Konseling (BK) di sekolah kini diubah dari citra "polisi sekolah" menjadi sahabat pendamping murid.</p>
+                    <p>Sekolah modern dianjurkan menyediakan ruang konseling yang nyaman serta program *mental health awareness* agar siswa merasa didengar dan tidak ragu untuk berkonsultasi ketika mengalami kesulitan emosional selama menuntut ilmu.</p>
+                `
+            }
+        };
+
+        // FUNGSI BUKA MODAL BERITA SEPENUHNYA
+        function openModal(id) {
+            const article = articlesData[id];
+            if (!article) return;
+
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <span class="badge" style="position:static; display:inline-block; margin-bottom:10px;">${article.badge}</span>
+                <h2>${article.title}</h2>
+                <div class="meta-info" style="margin-bottom:20px;">
+                    <span><i class="fa-regular fa-user"></i> ${article.author}</span>
+                    <span><i class="fa-regular fa-clock"></i> ${article.date}</span>
+                    <span><i class="fa-solid fa-check-double"></i> ${article.source}</span>
+                </div>
+                <img src="${article.image}" class="modal-img" alt="${article.title}">
+                <div class="modal-content-text">
+                    ${article.content}
+                </div>
+            `;
+
+            document.getElementById('articleModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // FUNGSI TUTUP MODAL
+        function closeModal() {
+            document.getElementById('articleModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // TUTUP MODAL SAAT DIKLIK DI LUAR
+        document.getElementById('articleModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // FUNGSI FILTER KATEGORI NAVIGASI
+        function filterCategory(category, element) {
+            const buttons = document.querySelectorAll('.nav-links button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if(element) element.classList.add('active');
+
+            const articles = document.querySelectorAll('.article-card');
+            articles.forEach(art => {
+                if (category === 'semua' || art.dataset.category === category) {
+                    art.style.display = 'flex';
+                } else {
+                    art.style.display = 'none';
+                }
+            });
+        }
+
+        // FUNGSI PENCARIAN REAL-TIME
+        function filterArticles() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const articles = document.querySelectorAll('.article-card');
+
+            articles.forEach(art => {
+                const title = art.dataset.title.toLowerCase();
+                if (title.includes(query)) {
+                    art.style.display = 'flex';
+                } else {
+                    art.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
